@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 | 品牌操盘手 · 运营总监 · 联合创始人</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5;
+  --bg-2:#F5F1EB;
+  --surface:#FFFFFF;
+  --text:#2D2A26;
+  --text-dim:#6B6560;
+  --text-light:#9A938B;
+  --accent:#D4855E;
+  --accent-light:#E8A87C;
+  --sage:#C5D5C0;
+  --sage-dark:#8FA68A;
+  --mint:#E8F0E5;
+  --cream:#F4E4C1;
+  --warm:#F5E6D3;
+  --terracotta:#C67B5A;
+  --forest:#3A4A3A;
+  --forest-light:#8A9A8A;
+  --border:#E8E2DA;
+  --shadow:0 20px 60px rgba(45,42,38,0.08);
+  --font-serif:'Noto Serif SC', serif;
+  --font-sans:'Noto Sans SC', sans-serif;
+  --font-display:'Space Grotesk', sans-serif;
+}
+*::before,*::after,*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* Grain overlay */
+.grain{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Cursor */
+.cursor-dot{
+  position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;
+  pointer-events:none;z-index:10000;mix-blend-mode:multiply;transition:transform .1s ease;transform:translate(-50%,-50%);
+}
+.cursor-ring{
+  position:fixed;width:40px;height:40px;border:1px solid rgba(212,133,94,0.4);border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s ease,height .3s ease,border-color .3s ease;
+}
+.cursor-ring.expand{width:60px;height:60px;border-color:rgba(212,133,94,0.7)}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+/* Navigation */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:24px 40px;display:flex;justify-content:space-between;align-items:center;
+  transition:background .4s ease,backdrop-filter .4s ease,padding .4s ease;
+}
+.navbar.scrolled{background:rgba(250,248,245,0.85);backdrop-filter:blur(20px);padding:16px 40px;border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-display);font-weight:600;font-size:1.1rem;letter-spacing:0.05em;color:var(--text)}
+.nav-links{display:flex;gap:32px}
+.nav-link{
+  font-family:var(--font-sans);font-size:0.85rem;font-weight:500;color:var(--text-dim);
+  text-decoration:none;position:relative;transition:color .3s ease;
+}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s ease}
+.nav-link:hover{color:var(--text)}
+.nav-link:hover::after{width:100%}
+@media(max-width:768px){
+  .navbar{padding:16px 20px}
+  .navbar.scrolled{padding:12px 20px}
+  .nav-links{display:none}
+}
+
+/* Utility */
+.container{max-width:1320px;margin:0 auto;padding:0 40px}
+.section-tag{
+  font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;display:inline-block;
+}
+.section-title{
+  font-family:var(--font-serif);font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:700;line-height:1.15;letter-spacing:-0.02em;
+}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Hero */
+.hero{
+  position:relative;height:100vh;min-height:700px;display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:120%;object-fit:cover;object-position:center 30%;transform:scale(1.1);transition:transform 0.1s ease-out}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(45,42,38,0.1) 0%,rgba(45,42,38,0.35) 60%,rgba(45,42,38,0.6) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;padding:0 40px 80px;width:100%;max-width:1320px;margin:0 auto;color:#fff}
+.hero-subtitle{font-family:var(--font-display);font-size:0.85rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.hero-subtitle::before{content:'';width:40px;height:1px;background:rgba(255,255,255,0.5)}
+.hero-name{font-family:var(--font-serif);font-size:clamp(3.5rem,11vw,8rem);font-weight:900;line-height:0.95;letter-spacing:-0.03em;margin-bottom:24px}
+.hero-title{font-size:clamp(1rem,2.5vw,1.25rem);font-weight:300;max-width:520px;line-height:1.8;opacity:0.95}
+.hero-quote{position:absolute;right:40px;bottom:80px;z-index:2;max-width:300px;font-family:var(--font-serif);font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,0.9);font-style:italic}
+@media(max-width:768px){
+  .hero-content{padding:0 20px 60px}
+  .hero-quote{position:static;margin-top:40px;max-width:100%;padding:0 20px}
+  .hero{height:auto;min-height:100vh;padding-top:300px}
+}
+
+/* Intro / About */
+.about{padding:140px 0}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center}
+.about-text{padding-right:40px}
+.about-text .lead{font-family:var(--font-serif);font-size:clamp(1.3rem,2.5vw,1.7rem);line-height:1.8;margin-bottom:36px;color:var(--text)}
+.about-text .lead .accent{color:var(--accent);font-weight:600}
+.about-text p{font-size:0.95rem;color:var(--text-dim);margin-bottom:20px;line-height:2}
+.advantage-list{list-style:none;margin:28px 0 36px}
+.advantage-list li{font-size:0.9rem;color:var(--text);line-height:1.8;padding-left:26px;position:relative;margin-bottom:14px}
+.advantage-list li::before{content:counter(adv);counter-increment:adv;position:absolute;left:0;top:2px;font-family:var(--font-display);font-size:0.75rem;font-weight:600;color:var(--accent);background:var(--mint);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.advantage-list{counter-reset:adv}
+.advantage-list li b{font-weight:600}
+.about-image{position:relative}
+.about-image-main{width:100%;height:560px;object-fit:cover;border-radius:8px;box-shadow:var(--shadow);filter:brightness(0.98)}
+.about-image-badge{position:absolute;bottom:-30px;left:-30px;background:var(--surface);padding:24px 32px;border-radius:8px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.about-image-badge .num{font-family:var(--font-display);font-size:2.5rem;font-weight:600;color:var(--accent);line-height:1}
+.about-image-badge .label{font-size:0.75rem;color:var(--text-dim);margin-top:4px;letter-spacing:0.05em}
+.life-callout{margin-top:32px;padding:22px 26px;background:var(--warm);border-radius:12px;border-left:3px solid var(--accent)}
+.life-callout .lc-title{font-family:var(--font-serif);font-size:1rem;font-weight:600;margin-bottom:6px}
+.life-callout p{font-size:0.85rem;color:var(--text-dim);line-height:1.8;margin:0}
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:60px}
+  .about-text{padding-right:0}
+  .about-image-main{height:420px}
+}
+
+/* Direction */
+.direction{padding:140px 0;background:var(--bg-2)}
+.direction-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
+.direction-text .lead{font-family:var(--font-serif);font-size:clamp(1.2rem,2.5vw,1.6rem);line-height:1.8;margin:24px 0 18px;color:var(--text)}
+.direction-text p{font-size:0.95rem;color:var(--text-dim);line-height:2;margin-bottom:18px}
+.dir-mantra{margin-top:28px;padding:24px 28px;background:var(--warm);border-radius:12px;border-left:3px solid var(--accent)}
+.dir-mantra p{font-family:var(--font-serif);font-size:1.05rem;line-height:1.9;color:var(--text);margin:0}
+.direction-life{display:flex;flex-direction:column;gap:20px}
+.dir-life-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:var(--shadow)}
+.dir-life-card .dl-tag{font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.15em;color:var(--accent);margin-bottom:10px}
+.dir-life-card h3{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:10px}
+.dir-life-card p{font-size:0.88rem;color:var(--text-dim);line-height:1.8;margin:0}
+@media(max-width:900px){.direction-grid{grid-template-columns:1fr;gap:50px}}
+
+/* Brand role */
+.brand-role{display:inline-block;margin:14px 0 18px;padding:6px 16px;border-radius:100px;background:var(--accent);color:#fff;font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.05em;font-weight:500}
+
+/* PR block */
+.pr-block{margin-top:6px;margin-bottom:18px}
+.pr-block-title{font-family:var(--font-serif);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:8px}
+
+/* Stats bar */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:80px;padding-top:60px;border-top:1px solid var(--border)}
+.stat-item{text-align:center}
+.stat-item .num{font-family:var(--font-display);font-size:2.8rem;font-weight:600;color:var(--text);line-height:1}
+.stat-item .label{font-size:0.8rem;color:var(--text-dim);margin-top:8px;letter-spacing:0.05em}
+@media(max-width:768px){.stats-bar{grid-template-columns:repeat(2,1fr);gap:32px 16px}.stat-item .num{font-size:2rem}}
+
+/* Brand Marquee */
+.brands{padding:100px 0;background:var(--bg-2);overflow:hidden}
+.brands .section-title{text-align:center;margin-bottom:20px;font-size:clamp(1.5rem,3vw,2.2rem)}
+.brands .brands-sub{text-align:center;color:var(--text-dim);font-size:0.9rem;margin-bottom:50px}
+.marquee-track{display:flex;gap:60px;animation:marquee 35s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;justify-content:center;padding:16px 32px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:var(--font-display);font-size:1.1rem;font-weight:500;color:var(--text-dim);white-space:nowrap;transition:all .3s ease}
+.marquee-item:hover{color:var(--accent);border-color:var(--accent-light);transform:translateY(-2px)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Brands Operated */
+.brands-operated{padding:160px 0;background:var(--bg)}
+.brands-operated-header{text-align:center;max-width:780px;margin:0 auto 100px}
+.brands-operated-header p{color:var(--text-dim);font-size:0.95rem;line-height:2;margin-top:20px}
+.brand-block{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:140px}
+.brand-block:last-child{margin-bottom:0}
+.brand-block.reverse .brand-text{order:2}
+.brand-block.reverse .brand-images{order:1}
+.brand-index{font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.2em;color:var(--accent);margin-bottom:18px}
+.brand-name{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;margin-bottom:8px}
+.brand-name .en{display:block;font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.15em;color:var(--text-light);text-transform:uppercase;margin-top:10px}
+.brand-slogan{font-family:var(--font-serif);font-size:1.15rem;color:var(--accent);margin:18px 0;font-style:italic}
+.brand-desc{font-size:0.95rem;color:var(--text-dim);line-height:2;margin-bottom:26px}
+.brand-points{list-style:none;margin-bottom:26px}
+.brand-points li{font-size:0.9rem;color:var(--text);line-height:1.8;padding-left:22px;position:relative;margin-bottom:13px}
+.brand-points li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.brand-points li b{color:var(--text);font-weight:600}
+.brand-tags{display:flex;gap:10px;flex-wrap:wrap}
+.brand-tag{padding:6px 16px;border-radius:100px;background:var(--mint);color:var(--sage-dark);font-size:0.75rem;font-weight:500}
+.brand-images{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.brand-images img{width:100%;height:220px;object-fit:cover;border-radius:12px;box-shadow:0 10px 40px rgba(45,42,38,0.06);transition:transform .5s ease}
+.brand-images img:hover{transform:scale(1.02)}
+@media(max-width:900px){
+  .brand-block{grid-template-columns:1fr;gap:40px;margin-bottom:90px}
+  .brand-block.reverse .brand-text{order:1}
+  .brand-block.reverse .brand-images{order:2}
+  .brand-images img{height:180px}
+}
+
+/* Platforms */
+.platforms{padding:160px 0;background:var(--bg-2)}
+.platforms-header{max-width:780px;margin-bottom:80px}
+.platforms-header p{color:var(--text-dim);font-size:0.95rem;line-height:2;margin-top:20px}
+.platform-group{margin-bottom:64px}
+.platform-group-title{font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:14px}
+.platform-group-title .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.platform-group-sub{font-size:0.85rem;color:var(--text-light);margin-bottom:26px}
+.platform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.platform-chip{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 20px;transition:all .3s ease}
+.platform-chip:hover{transform:translateY(-4px);border-color:var(--accent-light);box-shadow:var(--shadow)}
+.platform-chip .pc-name{font-family:var(--font-serif);font-size:1.05rem;font-weight:600;margin-bottom:4px}
+.platform-chip .pc-desc{font-size:0.75rem;color:var(--text-dim);line-height:1.6}
+.platform-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;padding-top:50px;border-top:1px solid var(--border)}
+.platform-stat{text-align:center}
+.platform-stat .ps-num{font-family:var(--font-display);font-size:2.2rem;font-weight:600;color:var(--accent);line-height:1}
+.platform-stat .ps-label{font-size:0.78rem;color:var(--text-dim);margin-top:8px;line-height:1.5}
+@media(max-width:900px){.platform-grid{grid-template-columns:repeat(2,1fr)}.platform-stats{grid-template-columns:repeat(2,1fr);gap:32px 16px}}
+
+/* Media PR */
+.media-pr{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.pr-column{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px}
+.pr-column .pr-block{margin-top:0;margin-bottom:24px}
+.media-pr-slots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pr-image{width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 8px 24px rgba(45,42,38,0.08);transition:transform .5s ease}
+.pr-image:hover{transform:scale(1.03)}
+@media(max-width:900px){.media-pr{grid-template-columns:1fr;padding:0}.pr-column{padding:28px;margin-bottom:24px}}
+
+/* Experience */
+.experience{padding:140px 0;background:var(--bg-2)}
+.experience-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px}
+.experience-intro{position:sticky;top:120px;height:fit-content}
+.experience-intro p{color:var(--text-dim);font-size:0.95rem;line-height:2;margin-top:24px}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.timeline-item{position:relative;padding-bottom:64px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-34px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg-2);border:2px solid var(--accent)}
+.timeline-date{font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:6px}
+.timeline-company{font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:4px}
+.timeline-role{font-size:0.9rem;color:var(--text-dim);margin-bottom:20px}
+.timeline-card{background:var(--surface);padding:28px;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px rgba(45,42,38,0.03)}
+.timeline-card ul{list-style:none}
+.timeline-card li{font-size:0.88rem;color:var(--text-dim);line-height:1.8;margin-bottom:10px;padding-left:18px;position:relative}
+.timeline-card li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-light)}
+.timeline-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.timeline-tag{padding:4px 12px;border-radius:100px;background:var(--mint);color:var(--sage-dark);font-size:0.72rem;font-weight:500}
+@media(max-width:900px){.experience-grid{grid-template-columns:1fr;gap:40px}.experience-intro{position:static}}
+
+/* AI Section */
+.ai-section{padding:160px 0;background:var(--bg)}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.ai-text .section-tag{margin-bottom:16px}
+.ai-text h2{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:24px}
+.ai-lead{font-size:1rem;color:var(--text);line-height:1.9;margin-bottom:26px}
+.ai-points{list-style:none;margin-bottom:30px}
+.ai-points li{font-size:0.92rem;color:var(--text-dim);line-height:1.9;padding-left:24px;position:relative;margin-bottom:15px}
+.ai-points li::before{content:'';position:absolute;left:0;top:11px;width:7px;height:7px;border-radius:50%;background:var(--sage-dark)}
+.ai-points li b{color:var(--text);font-weight:600}
+.ai-future{background:var(--warm);border-radius:14px;padding:28px;margin-top:10px}
+.ai-future .af-label{font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.15em;color:var(--accent);margin-bottom:10px;text-transform:uppercase}
+.ai-future p{font-size:0.92rem;color:var(--text);line-height:1.9;margin:0}
+.ai-visual img{width:100%;height:520px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow)}
+.ai-agent-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.ai-agent-tag{padding:6px 16px;border-radius:100px;background:var(--mint);color:var(--sage-dark);font-size:0.75rem;font-weight:500}
+@media(max-width:900px){.ai-grid{grid-template-columns:1fr;gap:40px}.ai-visual img{height:360px}}
+
+/* Lifestyle */
+.lifestyle{padding:140px 0}
+.lifestyle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.lifestyle-card{position:relative;border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 10px 40px rgba(45,42,38,0.06);transition:transform .4s ease,box-shadow .4s ease}
+.lifestyle-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.lifestyle-card img{width:100%;height:320px;object-fit:cover;transition:transform .6s ease}
+.lifestyle-card:hover img{transform:scale(1.05)}
+.lifestyle-card .content{padding:24px}
+.lifestyle-card .tag{font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.lifestyle-card h3{font-family:var(--font-serif);font-size:1.2rem;margin-bottom:8px}
+.lifestyle-card p{font-size:0.85rem;color:var(--text-dim);line-height:1.7}
+@media(max-width:768px){.lifestyle-grid{grid-template-columns:1fr}.lifestyle-card img{height:280px}}
+
+/* Quote section */
+.quote-section{padding:160px 0;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--warm) 100%)}
+.quote-section .quote{font-family:var(--font-serif);font-size:clamp(1.5rem,4vw,2.6rem);line-height:1.8;font-weight:600;max-width:900px;margin:0 auto}
+.quote-section .quote .accent{color:var(--accent)}
+.quote-section .author{margin-top:40px;font-size:0.85rem;color:var(--text-dim);letter-spacing:0.1em}
+
+/* Education & Volunteer */
+.education{padding:140px 0;background:var(--bg-2)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.edu-card{background:var(--surface);padding:32px;border-radius:12px;border:1px solid var(--border);transition:transform .3s ease,box-shadow .3s ease}
+.edu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.edu-card .year{font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:8px}
+.edu-card h3{font-family:var(--font-serif);font-size:1.2rem;margin-bottom:4px}
+.edu-card .degree{font-size:0.85rem;color:var(--text-dim)}
+.edu-card .edu-note{display:inline-block;margin-top:14px;padding:5px 14px;border-radius:100px;background:var(--mint);color:var(--sage-dark);font-size:0.72rem;font-weight:500;letter-spacing:0.02em}
+.edu-card .edu-note--text{display:block;margin-top:12px;padding:0;border-radius:0;background:none;color:var(--text-light);font-size:0.78rem;line-height:1.7}
+.volunteer{background:var(--surface);padding:32px;border-radius:12px;border:1px solid var(--border);display:flex;gap:24px;align-items:flex-start}
+.volunteer-icon{font-size:2rem;flex-shrink:0}
+.volunteer h3{font-family:var(--font-serif);font-size:1.1rem;margin-bottom:4px}
+.volunteer .date{font-size:0.8rem;color:var(--text-light);margin-bottom:12px}
+.volunteer p{font-size:0.85rem;color:var(--text-dim);line-height:1.8}
+@media(max-width:768px){.edu-grid{grid-template-columns:1fr}.volunteer{flex-direction:column}}
+
+/* Footer */
+.footer{padding:120px 0 60px;text-align:center;background:var(--bg);border-top:1px solid var(--border)}
+.footer-cta{font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:24px}
+.footer-cta .accent{color:var(--accent)}
+.footer p{color:var(--text-dim);font-size:0.9rem;margin-bottom:40px}
+.footer-links{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:60px}
+.footer-link{font-size:0.85rem;color:var(--text-dim);text-decoration:none;transition:color .3s ease}
+.footer-link:hover{color:var(--accent)}
+.footer-bottom{font-size:0.75rem;color:var(--text-light);padding-top:30px;border-top:1px solid var(--border)}
+
+/* Scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:10001;width:0}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grain"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">XING.</a>
+  <div class="nav-links">
+    <a href="#about" class="nav-link">关于</a>
+    <a href="#direction" class="nav-link">方向</a>
+    <a href="#brands" class="nav-link">品牌操盘</a>
+    <a href="#platforms" class="nav-link">平台运营</a>
+    <a href="#experience" class="nav-link">职业</a>
+    <a href="#ai" class="nav-link">AI智能体</a>
+    <a href="#lifestyle" class="nav-link">生活</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="assets/images/微信图片_20260716225759.jpg" alt="17" id="heroBg">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-subtitle">BRAND OPERATOR / CO-FOUNDER</div>
+    <h1 class="hero-name">17</h1>
+    <p class="hero-title">10年品牌全链路操盘 · 运营总监 · 联合创始人。<br>从0到3亿新消费品牌，到年销10亿智能科技品牌利润重构，再到AI组织的落地者。</p>
+  </div>
+  <div class="hero-quote">"既不盲动，也不躺倒，<br>挣扎向前。"</div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="section-tag">ABOUT ME</span>
+        <h2 class="section-title">关于我</h2>
+        <p class="lead">近 <span class="accent">10年</span> 数字营销与品牌全链路运营经验，<span class="accent">8年团队管理</span>，覆盖乙方公关、头部新消费联合创始人、连续创业三大赛道。</p>
+        <p>完整具备 0-1 品牌冷启动、1-10 规模化扩张、亿级智能美容科技品牌利润重构全周期操盘能力，深度掌握 Tech Marketing 产品商业化、海内外全域增长、团队商业化管理复合能力。我是一个实打实的业务操盘手——走过的每一步，都如数家珍。</p>
+        <ul class="advantage-list">
+          <li><b>十亿级智能美容科技品牌转型操盘</b>：重构达人渠道增长模型，搭建分层达人商业化体系，开拓 B 端礼品全新增长曲线。</li>
+          <li><b>头部新消费全周期操盘</b>：睡眠家居品牌「躺岛」联合创始人，带领品牌从零突破至年销 3 亿元。</li>
+          <li><b>乙方整合营销沉淀</b>：2年全案公关广告操盘，服务十余家客户，整体营销 ROI 提升 500%。</li>
+          <li><b>连续创业全域商业化</b>：原创毛绒 IP「绿豆 LUDO」海内外双线落地，为近 30 家消费科技品牌提供全域增长代运营。</li>
+          <li><b>AI 全链路组织落地</b>：较早落地 OpenAI、自研业务智能体，覆盖内容/客服/数据复盘/方案全业务环节。</li>
+        </ul>
+      </div>
+      <div class="about-image reveal">
+        <img src="assets/images/微信图片_20260716225816.jpg" alt="17" class="about-image-main">
+        <div class="about-image-badge">
+          <div class="num">10<span style="font-size:1.2rem">年</span></div>
+          <div class="label">品牌操盘经验</div>
+        </div>
+      </div>
+    </div>
+    <div class="stats-bar reveal">
+      <div class="stat-item"><div class="num" data-count="10">0</div><div class="label">年经验</div></div>
+      <div class="stat-item"><div class="num" data-count="3">0</div><div class="label">亿+ 躺岛年销</div></div>
+      <div class="stat-item"><div class="num" data-count="10">0</div><div class="label">亿 GEMO年销</div></div>
+      <div class="stat-item"><div class="num" data-count="30">0</div><div class="label">+ 服务品牌</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Direction -->
+<section class="direction" id="direction">
+  <div class="container">
+    <div class="direction-header" style="text-align:center;max-width:780px;margin:0 auto 70px">
+      <span class="section-tag">WHAT I'M LOOKING AT</span>
+      <h2 class="section-title">近期所看方向</h2>
+      <p style="color:var(--text-dim);font-size:0.95rem;line-height:2;margin-top:20px">希望再次创业，和优秀的人一起并肩同行。长期看好两条主线：中国品牌的海外化，以及具身智能与 AI 产品。</p>
+    </div>
+    <div class="direction-grid">
+      <div class="direction-text reveal">
+        <div class="dir-life-card" style="height:100%">
+          <div class="dl-tag">OVERSEAS EXPANSION</div>
+          <h3>中国品牌的海外化</h3>
+          <p>从躺岛、绿豆 LUDO 到金茉 GEMO，操盘过多个具备出海基因的新消费品牌。未来想把在国内验证过的爆品能力、内容能力、达人能力复制到海外——独立站、亚马逊、众筹、社媒种草全链路，让中国好品牌在世界舞台被看见。</p>
+        </div>
+      </div>
+      <div class="direction-text reveal">
+        <div class="dir-life-card" style="height:100%">
+          <div class="dl-tag">EMBODIED AI & AI PRODUCTS</div>
+          <h3>具身智能与 AI 产品</h3>
+          <p>AI 不只是工具，更是下一代产品的底层逻辑。长期关注具身智能、AI 硬件与 AI 原生产品的商业化路径，希望找到真正在做"伟大"事的团队，一起把技术变成用户爱不释手的产品。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brand Marquee -->
+<section class="brands">
+  <div class="container">
+    <h2 class="section-title reveal">服务与共创过的品牌</h2>
+    <p class="brands-sub reveal">从睡眠家居到美容科技，从原创 IP 到生活方式，覆盖新消费核心赛道。</p>
+  </div>
+  <div class="marquee-track">
+    <div class="marquee-item">躺岛 Just Chill</div>
+    <div class="marquee-item">金茉 GEMO</div>
+    <div class="marquee-item">绿豆 LUDO</div>
+    <div class="marquee-item">One habitat 一方小栖地</div>
+    <div class="marquee-item">绽家</div>
+    <div class="marquee-item">愉悦集团</div>
+    <div class="marquee-item">Ulike</div>
+    <div class="marquee-item">Smeal</div>
+    <div class="marquee-item">老庙黄金</div>
+    <div class="marquee-item">中国工商银行</div>
+    <div class="marquee-item">明亚经纪</div>
+    <div class="marquee-item">新氧</div>
+    <div class="marquee-item">蓬皮杜艺术中心</div>
+    <div class="marquee-item">英特尔</div>
+    <div class="marquee-item">菲力尔</div>
+    <div class="marquee-item">蚂蚁森林</div>
+    <div class="marquee-item">躺岛 Just Chill</div>
+    <div class="marquee-item">金茉 GEMO</div>
+    <div class="marquee-item">绿豆 LUDO</div>
+    <div class="marquee-item">One habitat 一方小栖地</div>
+    <div class="marquee-item">绽家</div>
+    <div class="marquee-item">愉悦集团</div>
+    <div class="marquee-item">Ulike</div>
+    <div class="marquee-item">Smeal</div>
+    <div class="marquee-item">老庙黄金</div>
+    <div class="marquee-item">中国工商银行</div>
+    <div class="marquee-item">明亚经纪</div>
+    <div class="marquee-item">新氧</div>
+    <div class="marquee-item">蓬皮杜艺术中心</div>
+    <div class="marquee-item">英特尔</div>
+    <div class="marquee-item">菲力尔</div>
+    <div class="marquee-item">蚂蚁森林</div>
+  </div>
+</section>
+
+<!-- Brands Operated -->
+<section class="brands-operated" id="brands">
+  <div class="container">
+    <div class="brands-operated-header reveal">
+      <span class="section-tag">BRANDS I OPERATED</span>
+      <h2 class="section-title">操盘过的新消费品品牌</h2>
+      <p>不是旁观者，是操盘手。从0到1、从1到10，每一段都是真实的痕迹。</p>
+    </div>
+
+    <!-- 躺岛 -->
+    <div class="brand-block reveal">
+      <div class="brand-text">
+        <div class="brand-index">01 / 04</div>
+        <div class="brand-name">躺岛<span class="en">Just Chill</span></div>
+        <div class="brand-slogan">"隔绝焦虑，随时躺倒。"</div>
+        <div class="brand-role">我的角色 · 运营操盘手</div>
+        <p class="brand-desc">2020年成立的睡眠环境品牌，一座来自不可知时空的神奇岛屿。以"自然+科技"带来舒适体验，从猫肚皮枕到瓜瓜凉被，让卧室里的产品自然而然地出现。全球优质原料 + 了不起的中国制造，环保是应该做的。</p>
+        <ul class="brand-points">
+          <li><b>0→3亿</b>：任职5年带品牌从0做到年销3亿，控制在10%经营利润率，花费过7000万市场费用。</li>
+          <li><b>爆品工厂</b>：猫肚皮枕系列年贡献近1亿；瓜瓜系列延展家居服/凉感抱枕；毛绒海滩、熊抱系列。</li>
+          <li><b>品效合一</b>：利路修首位代言人，合作杨天真、马家辉、papi酱等；4家线下门店月销20万。</li>
+          <li><b>联名破圈</b>：蓬皮杜艺术中心、线条小狗、姆明联名，把品牌抬升一个量级。</li>
+        </ul>
+        <div class="brand-tags"><span class="brand-tag">睡眠家居</span><span class="brand-tag">0→3亿</span><span class="brand-tag">爆品打造</span><span class="brand-tag">联名破圈</span></div>
+      </div>
+      <div class="brand-images">
+        <img src="assets/images/tangdao-1.jpg" alt="躺岛 瓜瓜凉被">
+        <img src="assets/images/tangdao-2.jpg" alt="躺岛 猫肚皮枕">
+        <img src="assets/images/tangdao-3.jpg" alt="躺岛 卢昱晓代言">
+        <img src="assets/images/tangdao-4.jpg" alt="躺岛 毛绒小鸡">
+      </div>
+    </div>
+
+    <!-- 金茉 GEMO -->
+    <div class="brand-block reverse reveal">
+      <div class="brand-text">
+        <div class="brand-index">02 / 04</div>
+        <div class="brand-name">金茉<span class="en">GEMO</span></div>
+        <div class="brand-slogan">"智能美容仪，高端 TOP1。"</div>
+        <div class="brand-role">我的角色 · 分销运营总监</div>
+        <p class="brand-desc">年销10亿高端智能美容仪器品牌。面临盈利结构失衡与流量增长瓶颈，核心目标是重构可持续健康增长模型。</p>
+        <ul class="brand-points">
+          <li><b>达人体系</b>：搭建十亿级分层达人种子库，联动伊能静、四火姐姐深度共创，稳居高端美容仪类目 TOP1。</li>
+          <li><b>达播引擎</b>：达播渠道占抖音大盘 70%，超额完成年度利润，成为内部少数持续正向盈利的核心渠道。</li>
+          <li><b>B端曲线</b>：开拓老庙黄金、中国工商银行、明亚经纪、新氧、高端月子中心等 ToB 战略合作，拓宽盈利边界。</li>
+        </ul>
+        <div class="brand-tags"><span class="brand-tag">年销10亿</span><span class="brand-tag">TOP1</span><span class="brand-tag">达播70%</span><span class="brand-tag">B端礼品</span></div>
+      </div>
+      <div class="brand-images">
+        <img src="assets/images/gemo-1.jpg" alt="金茉 GEMO 团队与活动">
+        <img src="assets/images/gemo-2.jpg" alt="金茉 GEMO AI智护水光">
+        <img src="assets/images/gemo-3.jpg" alt="金茉 GEMO × Hello Kitty">
+        <img src="assets/images/gemo-4.jpg" alt="金茉 GEMO 伊能静同款" style="object-position:50% 18%">
+      </div>
+    </div>
+
+    <!-- 绿豆 LUDO -->
+    <div class="brand-block reveal">
+      <div class="brand-text">
+        <div class="brand-index">03 / 04</div>
+        <div class="brand-name">绿豆<span class="en">LUDO</span></div>
+        <div class="brand-slogan">"向世界传递温柔的力量。"</div>
+        <div class="brand-role">我的角色 · 联合创始人</div>
+        <p class="brand-desc">2023年从手作礼物开始的原创毛绒 IP。从"秃头果园"到"世界的珍宝"，每个系列都是一座有故事的小岛。</p>
+        <ul class="brand-points">
+          <li><b>双线商业化</b>：国内打通天猫/抖音/得物/京东，全渠道销量突破 10 万只，两次登陆 CCTV-2 财经频道。</li>
+          <li><b>海外0-1</b>：独立搭建海外独立站，从零运营 Ins / Facebook / TikTok 社媒矩阵，打通跨境种草转化。</li>
+          <li><b>隐性设计与公益</b>：全系通过 GRS / OEKO-TEX 认证；穿山甲系列营收 20%、虎鲸系列 5% 定向动物保护；武康大楼、轩妈蛋黄酥联名。</li>
+        </ul>
+        <div class="brand-tags"><span class="brand-tag">原创毛绒IP</span><span class="brand-tag">10万只</span><span class="brand-tag">CCTV-2</span><span class="brand-tag">公益联动</span></div>
+      </div>
+      <div class="brand-images">
+        <img src="assets/images/ludo-1.jpg" alt="绿豆 LUDO 想象岛">
+        <img src="assets/images/ludo-2.jpg" alt="绿豆 LUDO 虎鲸船长">
+        <img src="assets/images/ludo-3.jpg" alt="绿豆 LUDO 武康大楼快闪">
+        <img src="assets/images/ludo-4.jpg" alt="绿豆 LUDO 物种地图">
+      </div>
+    </div>
+
+    <!-- One habitat -->
+    <div class="brand-block reverse reveal">
+      <div class="brand-text">
+        <div class="brand-index">04 / 04</div>
+        <div class="brand-name">一方小栖地<span class="en">One habitat</span></div>
+        <div class="brand-slogan">"一方小栖地，松弛好时光。"</div>
+        <div class="brand-role">我的角色 · 创始人</div>
+        <p class="brand-desc">以"向万物学习 + 人文精神"为底层哲学的生活方式家纺品牌。不卖单品，卖整套卧室场景；不堆材料参数，讲自然栖居的智慧。由17发起，与愉悦集团作为创始合伙人共同推进。</p>
+        <ul class="brand-points">
+          <li><b>向万物学习</b>：人类也是一只小动物，向鸟筑巢、猫松弛、松鼠储冬学习恰到好处的栖居方式。</li>
+          <li><b>人文精神</b>：不分东方西方，只分好的人文，让缂丝、苏绣活在日常。</li>
+          <li><b>高级但普世</b>：用香水的调性做品牌，用 Muji 的定价做市场，整套卧室 1-2 千元可入手。</li>
+          <li><b>供应链</b>：愉悦集团独家供应链（宜家 / 迪卡侬 / 希音核心战略供应商）。</li>
+        </ul>
+        <div class="brand-tags"><span class="brand-tag">生活方式家纺</span><span class="brand-tag">向万物学习</span><span class="brand-tag">愉悦集团</span><span class="brand-tag">场景化</span></div>
+      </div>
+      <div class="brand-images">
+        <img src="assets/images/one-habitat-1.jpg" alt="One habitat 自然肌理">
+        <img src="assets/images/one-habitat-2.jpg" alt="One habitat 亲肤麻">
+        <img src="assets/images/one-habitat-4.jpg" alt="One habitat 手工织布">
+        <img src="assets/images/one-habitat-5.jpg" alt="One habitat 卧室场景">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Platforms -->
+<section class="platforms" id="platforms">
+  <div class="container">
+    <div class="platforms-header reveal">
+      <span class="section-tag">PLATFORMS & OPERATIONS</span>
+      <h2 class="section-title">海内外营销与运营</h2>
+      <p>海内外全域增长操盘者。从国内内容电商到海外独立站，从品效合一到专业媒体活动，全链路都能打——既懂国内平台的流量漏斗，也亲手搭过海外从0到1。</p>
+    </div>
+
+    <!-- 国内 -->
+    <div class="platform-group reveal">
+      <div class="platform-group-title"><span class="dot"></span>国内平台 · 品效合一</div>
+      <div class="platform-group-sub">抖音 / 小红书 / 天猫 / 京东 / 得物 / 唯品会 / B站 —— 极其擅长品效与营销结合</div>
+      <div class="platform-grid">
+        <div class="platform-chip"><div class="pc-name">抖音</div><div class="pc-desc">月销50万→1500万，金茉爆款短视频破圈</div></div>
+        <div class="platform-chip"><div class="pc-name">小红书</div><div class="pc-desc">种草 + 搜索卡位 + 投流，品效闭环主阵地</div></div>
+        <div class="platform-chip"><div class="pc-name">天猫</div><div class="pc-desc">稳基本盘 + 精细运营，李佳琦头部达播，达播与私域会员双线运营</div></div>
+        <div class="platform-chip"><div class="pc-name">京东</div><div class="pc-desc">品质人群与礼赠场景渗透</div></div>
+        <div class="platform-chip"><div class="pc-name">得物</div><div class="pc-desc">年轻潮流人群精准触达</div></div>
+        <div class="platform-chip"><div class="pc-name">唯品会</div><div class="pc-desc">特卖清仓与利润补充</div></div>
+        <div class="platform-chip"><div class="pc-name">B站</div><div class="pc-desc">覆盖式种草 + 深度内容，内容营销 ROI 3.5+</div></div>
+        <div class="platform-chip"><div class="pc-name">微信 / 知乎</div><div class="pc-desc">私域与信任型转化</div></div>
+      </div>
+      <div class="platform-stats">
+        <div class="platform-stat"><div class="ps-num">3.5+</div><div class="ps-label">内容营销投放 ROI</div></div>
+        <div class="platform-stat"><div class="ps-num">20亿</div><div class="ps-label">销售额</div></div>
+        <div class="platform-stat"><div class="ps-num">7000万+</div><div class="ps-label">营销预算管控</div></div>
+        <div class="platform-stat"><div class="ps-num">30x</div><div class="ps-label">抖音月销50万→1500万</div></div>
+      </div>
+    </div>
+
+    <!-- 海外 -->
+    <div class="platform-group reveal">
+      <div class="platform-group-title"><span class="dot"></span>海外平台 · 从0到1搭建</div>
+      <div class="platform-group-sub">独立站 / 亚马逊 / Kickstarter / Indiegogo / Facebook / Instagram / TikTok —— 海外媒体与电商都极擅长</div>
+      <div class="platform-grid">
+        <div class="platform-chip"><div class="pc-name">独立站</div><div class="pc-desc">自建品牌站，沉淀私域与复购</div></div>
+        <div class="platform-chip"><div class="pc-name">亚马逊</div><div class="pc-desc">北美区开店与运营销售</div></div>
+        <div class="platform-chip"><div class="pc-name">Kickstarter</div><div class="pc-desc">众筹验证产品与市场</div></div>
+        <div class="platform-chip"><div class="pc-name">Indiegogo</div><div class="pc-desc">跨境众筹第二曲线</div></div>
+        <div class="platform-chip"><div class="pc-name">Facebook</div><div class="pc-desc">海外社媒矩阵与投流</div></div>
+        <div class="platform-chip"><div class="pc-name">Instagram</div><div class="pc-desc">视觉种草与品牌调性</div></div>
+        <div class="platform-chip"><div class="pc-name">TikTok</div><div class="pc-desc">短视频跨境种草转化</div></div>
+        <div class="platform-chip"><div class="pc-name">跨境链路</div><div class="pc-desc">种草→转化全闭环打通</div></div>
+      </div>
+    </div>
+
+    <!-- 专业媒体活动 -->
+    <div class="platform-group reveal" style="margin-top:80px">
+      <div class="platform-group-title"><span class="dot"></span>专业媒体活动策划</div>
+      <div class="platform-group-sub">科技新品发布 + 国家级峰会宣传 —— 对科技产品的营销推广、媒体沟通与活动策划有体系化理解</div>
+      <div class="media-pr">
+        <div class="pr-column reveal">
+          <div class="pr-block">
+            <div class="pr-block-title">① 科技 / 芯片产品 · 营销推广与新品发布</div>
+            <p>为 <span class="pr-highlight">英特尔、菲力尔</span> 等科技品牌策划 <span class="pr-highlight">中国区新品发布会</span>，<span class="pr-highlight">组织媒体发布会</span>，从科技媒体沟通到发布会落地全链路操盘。</p>
+            <p>擅长科技文案策划，涵盖 <span class="pr-highlight">新闻稿、专访稿、品牌稿、产品稿、公关稿</span> 等，总计创造稿件达 <span class="pr-highlight">200+ 篇</span>。</p>
+          </div>
+          <div class="media-pr-slots">
+            <img src="assets/images/media-5.jpg" alt="菲力尔 FLIR 2019中国区经销商会议暨新产品发布会" class="pr-image">
+            <img src="assets/images/media-2.jpg" alt="专业媒体访谈现场" class="pr-image">
+            <img src="assets/images/media-3.jpg" alt="深圳市政府新闻发布会" class="pr-image">
+            <img src="assets/images/media-4.jpg" alt="IT领袖峰会嘉宾合影" class="pr-image">
+          </div>
+        </div>
+        <div class="pr-column reveal">
+          <div class="pr-block">
+            <div class="pr-block-title">② 国家级峰会 · 整体营销宣传</div>
+            <p>2018–2020 任北京金典永恒公关广告 <span class="pr-highlight">市场营销总监</span>（下属15–50人），负责 <span class="pr-highlight">中国IT领袖峰会、中国电子信息博览会、数字中国建设峰会、崇礼论坛</span> 等 13 场国家级会议整体宣传。</p>
+            <p>与李彦宏、王中军、李斌、丁健等行业领袖交流，收获 5 个行业奖项，发展 80+ 渠道经销商。</p>
+          </div>
+          <div class="media-pr-slots">
+            <img src="assets/images/media-1.jpg" alt="2019中国（深圳）IT领袖峰会演讲" class="pr-image">
+            <img src="assets/images/media-6.jpg" alt="IT新未来 5G与人工智能大会现场" class="pr-image">
+            <img src="assets/images/media-7.jpg" alt="2018崇礼论坛" class="pr-image">
+            <img src="assets/images/media-8.jpg" alt="2018崇礼论坛嘉宾合影" class="pr-image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="experience-grid">
+      <div class="experience-intro reveal">
+        <span class="section-tag">CAREER</span>
+        <h2 class="section-title">职业<br>经历</h2>
+        <p>从乙方公关到品牌联合创始人，从全域营销到 AI 组织落地。每一步都是实打实的操盘，而不是纸上谈兵。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2025.04 — 至今</div>
+          <div class="timeline-company">杭州托拉斯人工智能科技</div>
+          <div class="timeline-role">联合创始人 · 团队30-50人</div>
+          <div class="timeline-card">
+            <ul>
+              <li>原创 IP「绿豆 LUDO」海内外全链路品牌化升级，全渠道销量突破 10 万只，两次登陆 CCTV-2</li>
+              <li>为绽家、愉悦集团、Ulike、Smeal 等近 30 家品牌提供全域增长代运营，独创 C2M 反向定制</li>
+              <li>牵头 AI 智能体业务落地，搭建「自有品牌孵化 + 外部增长服务 + AI 技术提效」三位一体模式</li>
+            </ul>
+            <div class="timeline-tags"><span class="timeline-tag">联合创始</span><span class="timeline-tag">AI落地</span><span class="timeline-tag">30+代运营</span></div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2024.10 — 2025.03</div>
+          <div class="timeline-company">杭州由莱科技</div>
+          <div class="timeline-role">运营总监 · 团队5-20人</div>
+          <div class="timeline-card">
+            <ul>
+              <li>操盘年销 10 亿高端智能美容仪金茉 GEMO，重构达人体系，稳居类目 TOP1</li>
+              <li>达播渠道占抖音大盘 70%，超额完成年度利润，成为内部少数持续盈利渠道</li>
+              <li>开拓老庙黄金、工行、明亚、新氧等 B 端礼品战略，拓宽盈利边界</li>
+            </ul>
+            <div class="timeline-tags"><span class="timeline-tag">10亿规模</span><span class="timeline-tag">TOP1</span><span class="timeline-tag">B端曲线</span></div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2020.05 — 2024.09</div>
+          <div class="timeline-company">北京躺岛科技</div>
+          <div class="timeline-role">销售总监 / 合伙人 · 团队30-50人</div>
+          <div class="timeline-card">
+            <ul>
+              <li>统筹运营部与线下门店，带品牌从 0→100万→1亿→3亿，控制在 10% 经营利润率</li>
+              <li>爆品打造：猫肚皮枕年贡献近1亿，瓜瓜系列、毛绒海滩、联名系列持续破圈</li>
+              <li>Marcom 品效合一：利路修首位代言人，4家线下门店；Netflix 式自由与责任管理法</li>
+            </ul>
+            <div class="timeline-tags"><span class="timeline-tag">0→3亿</span><span class="timeline-tag">爆品打造</span><span class="timeline-tag">多平台运营</span></div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2018.04 — 2020.05</div>
+          <div class="timeline-company">北京金典永恒公关广告</div>
+          <div class="timeline-role">市场营销总监 · 下属15-50人</div>
+          <div class="timeline-card">
+            <ul>
+              <li>服务英特尔、菲力尔、北京二锅头等十余家客户，整体 ROI 提升 500%，用户增长 150%</li>
+              <li>负责中国IT领袖峰会等 13 场国家级会议整体宣传，收获 5 个行业奖项</li>
+              <li>提出"整合营销布局"战略转型，半年卖出 7 年推广无果的高科技养生产品</li>
+            </ul>
+            <div class="timeline-tags"><span class="timeline-tag">整合营销</span><span class="timeline-tag">500% ROI</span><span class="timeline-tag">13场国家级会议</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Section -->
+<section class="ai-section" id="ai">
+  <div class="container">
+    <div class="ai-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto">
+      <div class="ai-text reveal">
+        <span class="section-tag">AI AGENT</span>
+        <h2>AI 智能体<br>是组织的底层操作系统</h2>
+        <p class="ai-lead">不是追风口，是早入场。从日常生活到团队作战，AI 已经长在我的工作流里。</p>
+        <ul class="ai-points">
+          <li><b>最早的使用者</b>：较早落地 OpenAI（Codex）、自研业务智能体，覆盖内容生产、客服应答、数据复盘、方案输出全业务环节。</li>
+          <li><b>日常生活应用</b>：用 AI 搭网站、做内容、做分析；团队内部几乎人人都有一个 agent，把重复劳动交给它。</li>
+          <li><b>组织提效</b>：搭建团队共享 AI 知识库，输出标准化 AI 工作流程，营销、运营、客服全链路人效提升 60% 以上，支撑小团队轻量化高效运转。</li>
+        </ul>
+        <div class="ai-agent-tags">
+          <span class="ai-agent-tag">内容生产</span>
+          <span class="ai-agent-tag">客服应答</span>
+          <span class="ai-agent-tag">数据复盘</span>
+          <span class="ai-agent-tag">方案输出</span>
+          <span class="ai-agent-tag">知识库</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lifestyle -->
+<section class="lifestyle" id="lifestyle">
+  <div class="container">
+    <span class="section-tag">LIFESTYLE</span>
+    <h2 class="section-title reveal">工作之外，<br>我是一个终身运动者。</h2>
+    <div class="lifestyle-grid">
+      <div class="lifestyle-card reveal">
+        <img src="assets/images/微信图片_20260716225934.jpg" alt="普拉提">
+        <div class="content">
+          <div class="tag">PILATES · HEALTH CP</div>
+          <h3>普拉提</h3>
+          <p>最爱的运动。在呼吸与控制中训练核心力量，也训练专注力。柔软与力量，从来不冲突。最近的健康 CP：普拉提 + 养生艾灸。</p>
+        </div>
+      </div>
+      <div class="lifestyle-card reveal" style="transition-delay:.1s">
+        <img src="assets/images/微信图片_20260716225931.jpg" alt="网球">
+        <div class="content">
+          <div class="tag">TENNIS · LEVELING UP</div>
+          <h3>网球</h3>
+          <p>正在精进的新技能。享受每一次挥拍、奔跑、接发中的成长感。技能提升中，人生也在升级。</p>
+        </div>
+      </div>
+      <div class="lifestyle-card reveal" style="transition-delay:.2s">
+        <img src="assets/images/微信图片_20260716225759.jpg" alt="在路上">
+        <div class="content">
+          <div class="tag">MOTION · FORWARD</div>
+          <h3>在路上</h3>
+          <p>无论是骑行、徒步还是日出，我都相信身体在路上，脑子会更清醒。前路很长，保持向前。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="quote-section">
+  <div class="container">
+    <p class="quote reveal">
+      找机会，做点<span class="accent">"伟大"</span>的事。
+    </p>
+    <div class="author reveal">— 17</div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="education" id="education">
+  <div class="container">
+    <span class="section-tag">EDUCATION</span>
+    <h2 class="section-title reveal">教育与志愿</h2>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="year">2018 — 2021</div>
+        <h3>中国人民大学</h3>
+        <div class="degree">研究生 · 企业管理方向</div>
+        <div class="edu-note">在职研究生</div>
+      </div>
+      <div class="edu-card">
+        <div class="year">2012 — 2016</div>
+        <h3>山东农业大学</h3>
+        <div class="degree">本科 · 林学</div>
+        <div class="edu-note edu-note--text">优秀毕业生 · 一等奖学金 · 爱林奖学金</div>
+      </div>
+    </div>
+    <div class="volunteer reveal">
+      <div class="volunteer-icon">🛡️</div>
+      <div>
+        <h3>上海新冠疫情小区志愿者</h3>
+        <div class="date">2020.03 — 2020.07</div>
+        <p>上海疫情肆起时，组织民间志愿者团队，为小区拉来腾讯和基金会的两次赞助，为老人提供食物、为志愿者发放防护服。一代人有一代人的长征。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-cta reveal">
+      找机会，做点<span class="accent">"伟大"</span>的事
+    </div>
+    <p class="reveal">运营总监 / 联合创始人 · 杭州 · 10年品牌操盘经验</p>
+    <div class="footer-links reveal">
+      <a href="#about" class="footer-link">关于</a>
+      <a href="#direction" class="footer-link">方向</a>
+      <a href="#brands" class="footer-link">品牌操盘</a>
+      <a href="#platforms" class="footer-link">平台运营</a>
+      <a href="#experience" class="footer-link">职业</a>
+      <a href="#ai" class="footer-link">AI智能体</a>
+      <a href="#lifestyle" class="footer-link">生活</a>
+    </div>
+    <div class="footer-bottom">© 2025 17 · 个人主页 · Designed with care</div>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px'; cursorDot.style.top = mouseY + 'px';
+});
+function animateRing(){
+  ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a,.brand-block,.platform-chip,.media-pr,.timeline-card,.lifestyle-card,.edu-card,.marquee-item,.brand-logo-card,.ai-future').forEach(el => {
+  el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
+});
+
+// Scroll progress + navbar
+const navbar = document.getElementById('navbar');
+const scrollProgress = document.getElementById('scrollProgress');
+const heroBg = document.getElementById('heroBg');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.style.width = (scrolled / total) * 100 + '%';
+  if (scrolled > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+  if (heroBg) heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+});
+
+// Reveal animations
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.count);
+      let current = 0; const increment = target / 50;
+      const update = () => {
+        current += increment;
+        if (current < target) { entry.target.textContent = Math.floor(current); requestAnimationFrame(update); }
+        else { entry.target.textContent = target; }
+      };
+      update(); counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+</script>
+</body>
+</html>
